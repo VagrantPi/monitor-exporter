@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+  node-exporter:
+    image: prom/node-exporter:v1.2.2
+    container_name: monitoring_node_exporter
+    restart: always
+    ports:
+      - 9100:9100
+
+  cadvisor:
+    image: google/cadvisor:v0.32.0
+    container_name: monitoring_cadvisor
+    restart: always
+    command: ["--enable_load_reader=true", "--container_hints=/etc/cadvisor/container_hints.json", "--v=4", "--stderrthreshold=0", "--log_dir=/var/log", "--logtostderr=false", "
+--alsologtostderr=false"]
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    ports:
+      - 8080:8080
+  

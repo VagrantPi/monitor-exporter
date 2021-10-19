@@ -9,8 +9,11 @@ services:
       - 9100:9100
 
   cadvisor:
-    image: google/cadvisor:v0.32.0
+    image: monitoring_cadvisor:latest
     container_name: monitoring_cadvisor
+    build:
+      context: ../
+      dockerfile: docker/cadvisor.Dockerfile
     restart: always
     command: ["--enable_load_reader=true", "--container_hints=/etc/cadvisor/container_hints.json", "--v=4", "--stderrthreshold=0", "--log_dir=/var/log", "--logtostderr=false", "
 --alsologtostderr=false"]

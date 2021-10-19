@@ -12,7 +12,7 @@ services:
     image: monitoring_cadvisor:latest
     container_name: monitoring_cadvisor
     build:
-      context: ../
+      context: ./
       dockerfile: docker/cadvisor.Dockerfile
     restart: always
     command: ["--enable_load_reader=true", "--container_hints=/etc/cadvisor/container_hints.json", "--v=4", "--stderrthreshold=0", "--log_dir=/var/log", "--logtostderr=false", "
@@ -24,5 +24,15 @@ services:
       - /var/lib/docker/:/var/lib/docker:ro
       - /dev/disk/:/dev/disk:ro
     ports:
-      - 8080:8080
+      - 8081:8080
   
+
+  nginx:
+    container_name: nginx
+    image: nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./htpasswd:/etc/nginx/basic_auth/.htpasswd
+    restart: always

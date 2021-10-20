@@ -5,6 +5,10 @@ services:
     image: prom/node-exporter:v1.2.2
     container_name: monitoring_node_exporter
     restart: always
+    command:
+      - '--path.rootfs=/host'
+    volumes:
+      - '/:/host:ro,rslave'
     # ports:
     #  - 9101:9100
 
@@ -28,7 +32,7 @@ services:
   
 
   nginx:
-    container_name: nginx
+    container_name: monitoring_nginx
     image: nginx
     ports:
       - "8080:80"

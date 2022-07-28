@@ -40,3 +40,8 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
       - ./htpasswd:/etc/nginx/basic_auth/.htpasswd
     restart: always
+
+networks:
+  default:
+    external:
+      name: monitor-network

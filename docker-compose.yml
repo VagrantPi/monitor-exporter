@@ -27,6 +27,10 @@ services:
       - /sys:/sys:ro
       - /var/lib/docker/:/var/lib/docker:ro
       - /dev/disk/:/dev/disk:ro
+    logging:
+      options:
+        max-size: "200m"
+        max-file: "3"
     #ports:
     #  - 8081:8080
   

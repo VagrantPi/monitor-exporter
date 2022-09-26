@@ -1,4 +1,4 @@
-FROM google/cadvisor:v0.32.0
+FROM gcr.io/cadvisor/cadvisor:latest
 ADD htpasswd /auth.htpasswd
 
 EXPOSE 8080
